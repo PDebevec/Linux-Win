@@ -1,6 +1,6 @@
 # Linux-Win
 
-################################LINUX
+################################LINUX<br/>
 sudo apt update
 sudo apt install samba smbclient
 sudo apt install net-tools
