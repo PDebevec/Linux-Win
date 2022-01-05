@@ -1,0 +1,29 @@
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+Install-Module -Name NTFSSecurity
+
+diskpart
+-list volume
+-select volume nx
+-shrink desired=x	(v mb)
+-exit
+
+get-disk
+new-partition -disknumber nx -usemaximumsize -driveletter lx | format-volume -filesystem NTFS -newfilesystemlable ix
+
+mkdir dx
+
+$geslo = ConvertTo-SecureString -String "Password2x" -AsPlainText -Force
+
+new-localuser -name x -password $geslo -accountneverexpires
+new-localgroup -name x
+add-localgroupmember -group x -name x
+
+Add-NTFSAccess -Path x:\x -Account nx -AccessRights FullControl -AccessType Allow
+New-SmbShare -Path x:\x -Name wx
+Grant-SmbShareAccess -Name wx -AccountName nx -AccessRight Full
+
+#linux
+sudo mkdir /x
+sudo chown ax /x
+sudo mount //0.0.0.0/w /x -o username=lux,password=x
